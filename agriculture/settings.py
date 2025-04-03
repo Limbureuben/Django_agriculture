@@ -104,6 +104,14 @@ GRAPHENE = {
     "SCHEMA": "myapp.schema.schema"
 }
 
+GRAPHENE = {
+    "SCHEMA": "myapp.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+}
+
+
 
 
 # Internationalization
