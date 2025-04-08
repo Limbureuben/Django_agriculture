@@ -15,5 +15,7 @@ class FarmReportView(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def get(self, request):
-        farm_reports = FarmReport.objects.all()
-        serializers = FarmSerializer
+        report = FarmReport.objects.all().order_by('-id')
+        serializers = FarmSerializer(report, many=True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+    
