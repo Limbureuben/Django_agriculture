@@ -19,3 +19,10 @@ class FarmReportView(APIView):
         serializers = FarmSerializer(report, many=True)
         return Response(serializers.data, status=status.HTTP_200_OK)
     
+class RegisterView(APIView):
+    def post(self, request):
+        serializers = RegisterSerializer(data = request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
