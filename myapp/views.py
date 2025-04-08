@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import *
+from rest_framework import status
 # Create your views here.
 
 class FarmReportView(APIView):
@@ -9,4 +10,5 @@ class FarmReportView(APIView):
         serializers = FarmSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
-            return Response({"status": "success", "data": serializers.data})
+            return Response({"message": "Report submitted successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
